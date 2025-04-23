@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'core/app/routes.dart';
 import 'core/config/theme/app_theme.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,13 +13,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Core Ont',
-      debugShowCheckedModeBanner:false,
-      theme: AppTheme(selectedColor:0).theme(),
-      home: Center(
-        child: IconButton(onPressed: (){}, icon: Icon(Icons.exit_to_app)),
-      ),
-      );
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme(selectedColor: 5).theme(),
+      initialRoute: AppRoutes.login,
+      getPages: AppRoutes.routes,
+    );
   }
 }
