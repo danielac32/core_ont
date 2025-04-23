@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
               children: [
                 // Título
                 const Text(
-                  'Iniciar Sesión',
+                  'Core System',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
