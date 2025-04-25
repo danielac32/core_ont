@@ -47,9 +47,9 @@ class LoginController extends GetxController {
   void submitForm() {
     if (validateEmail(emailController.text) == null &&
         validatePassword(passwordController.text) == null) {
-      Get.snackbar('Inicio de Sesión', 'Inicio de sesión exitoso');
+     // Get.snackbar('Inicio de Sesión', 'Inicio de sesión exitoso');
     } else {
-      Get.snackbar('Error', 'Por favor, corrige los errores en el formulario');
+     // Get.snackbar('Error', 'Por favor, corrige los errores en el formulario');
     }
 
     final newUser = UserEntity(
@@ -59,7 +59,7 @@ class LoginController extends GetxController {
       password: 'ac32mqn42',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
-      department: Directorate.generalInformationTechnology.label,
+      department: Directorate.direccionGeneralTecnologiaInformacion.label,
       profileImage: 'https://example.com/profile.jpg',
       position: Position.COORDINADOR.label,//'Coordinador',
       rol: Role.ADMIN.label

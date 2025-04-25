@@ -3,11 +3,14 @@ import 'package:get/get.dart';
 
 import '../../domain/entities/user.dart';
 import '../controllers/menu_dashboard_controller.dart';
+import '../widgets/dashboard/UserPage/user_widget.dart';
 import '../widgets/dashboard/avatar_widget.dart';
 import '../widgets/dashboard/config_widget.dart';
 import '../widgets/dashboard/content_widget.dart';
+import '../widgets/dashboard/drawer_header.dart';
 import '../widgets/dashboard/item_widget.dart';
-import '../widgets/dashboard/user_widget.dart';
+
+
 
 
 
@@ -32,7 +35,6 @@ class HomeScreen extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     final UserEntity? user = Get.arguments as UserEntity?;
 
-
     user.toString();
     // Verificar si el argumento es nulo
     if (user == null) {
@@ -49,7 +51,6 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-
         title: Text('Dashboard'),
         backgroundColor: colors.primary,
       ),
@@ -58,32 +59,7 @@ class HomeScreen extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             // Encabezado del Drawer
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: colors.primary,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AvatarWidget(colors: colors,urlImage: ""),
-                  SizedBox(height: 10),
-                  Text(
-                    '${user.position}',
-                    style: TextStyle(
-                      color: colors.onPrimary,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
-                    '${user.email}',
-                    style: TextStyle(
-                      color: colors.onPrimary.withOpacity(0.7),
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            DrawerWidget(colors: colors, user: user),
             //////////////////////////////////////////////////////////////////////////////
             // Opciones del menú
             ItemWidget(icon:Icons.home,colors:colors.primary,text: 'Inicio',load:'home'),
@@ -104,6 +80,42 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+/*
+class DrawerWidget extends StatelessWidget {
+  const DrawerWidget({
+    super.key,
+    required this.colors,
+    required this.user,
+  });
+
+  final ColorScheme colors;
+  final UserEntity user;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 180.0,
+      child: DrawerHeader(
+        decoration: BoxDecoration(
+          color: colors.primary,
+    
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AvatarWidget(colors: colors,urlImage: ""),
+            SizedBox(height: 10),
+            TextDrawerDashboard(text: user.position!, colors: colors.onPrimary,size: 18),
+            TextDrawerDashboard(text: user.email, colors: colors.onPrimary.withOpacity(0.7),size: 14),
+            TextDrawerDashboard(text: user.name, colors: colors.onPrimary.withOpacity(0.7),size: 14),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+*/
 
 
 

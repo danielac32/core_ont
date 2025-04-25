@@ -26,35 +26,38 @@ enum MenuOption {
 }
 
 enum Directorate {
-  generalAdministrationAndServices,
-  generalExpenditure,
-  generalUniqueAccount,
-  generalInformationTechnology,
-  generalFinancialPlanningAndAnalysis,
-  generalRevenueCollection,
-  generalHumanResources,
-  generalInvestmentsAndSecurities,
-  generalLegalConsultancy;
+  direccionGeneralAdministracion,
+  direccionGeneralEgreso,
+  direccionGeneralIngreso,
+  direccionGeneralCuentaUnica,
+  direccionGeneralTecnologiaInformacion,
+  direccionGeneralPlanificacionAnalisisFinanciero,
+  direccionGeneralRecaudacionIngreso,
+  direccionGeneralRecursosHumanos,
+  direccionGeneralInversionesYValores,
+  direccionGeneralConsultoriaJuridica;
 
   String get label {
     switch (this) {
-      case Directorate.generalAdministrationAndServices:
-        return 'Dirección General de Administración y Servicios';
-      case Directorate.generalExpenditure:
+      case Directorate.direccionGeneralAdministracion:
+        return 'Dirección General de Administración';
+      case Directorate.direccionGeneralEgreso:
         return 'Dirección General de Egreso';
-      case Directorate.generalUniqueAccount:
+      case Directorate.direccionGeneralIngreso:
+        return 'Dirección General de Ingreso';
+      case Directorate.direccionGeneralCuentaUnica:
         return 'Dirección General de Cuenta Única';
-      case Directorate.generalInformationTechnology:
+      case Directorate.direccionGeneralTecnologiaInformacion:
         return 'Dirección General de Tecnología de Información';
-      case Directorate.generalFinancialPlanningAndAnalysis:
+      case Directorate.direccionGeneralPlanificacionAnalisisFinanciero:
         return 'Dirección General de Planificación y Análisis Financiero';
-      case Directorate.generalRevenueCollection:
+      case Directorate.direccionGeneralRecaudacionIngreso:
         return 'Dirección General de Recaudación de Ingreso';
-      case Directorate.generalHumanResources:
+      case Directorate.direccionGeneralRecursosHumanos:
         return 'Dirección General de Recursos Humanos';
-      case Directorate.generalInvestmentsAndSecurities:
+      case Directorate.direccionGeneralInversionesYValores:
         return 'Dirección General de Inversiones y Valores';
-      case Directorate.generalLegalConsultancy:
+      case Directorate.direccionGeneralConsultoriaJuridica:
         return 'Dirección General de Consultoría Jurídica';
     }
   }
@@ -97,14 +100,18 @@ enum Position {
 }
 
 enum Role {
-  USER,
-  ADMIN;
+  SUPER_ADMIN,
+  ADMIN,
+  USER;
+
   String get label {
     switch (this) {
-      case Role.USER:
-        return "USER";
+      case Role.SUPER_ADMIN:
+        return 'Super Admin';
       case Role.ADMIN:
-        return "ADMIN";
+        return 'Admin';
+      case Role.USER:
+        return 'User';
     }
   }
 }
