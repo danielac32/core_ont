@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 //import '../../core/app/routes.dart';
 import 'package:get/get.dart';
 import '../../infrastructure/middlewares/get_login.dart';
-import '../widgets/custom_text_button_login.dart';
+import '../widgets/login/custom_text_button_login.dart';
 
 
 
@@ -90,19 +90,23 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 24),
 
                 // Botón de Inicio de Sesión
-                ElevatedButton(
-                  onPressed: controller.submitForm,
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                SizedBox(
+                  width: 200, // <-- match_parent
+                  height: 40,
+                  child: ElevatedButton(
+                    onPressed: controller.submitForm,
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 3,
+                      shadowColor: colors.secondary//Colors.blue.withOpacity(0.5),
                     ),
-                    elevation: 3,
-                    shadowColor: colors.secondary//Colors.blue.withOpacity(0.5),
-                  ),
-                  child: const Text(
-                    'Iniciar Sesión',
-                    style: TextStyle(fontSize: 18),
+                    child: const Text(
+                      'Iniciar Sesión',
+                      style: TextStyle(fontSize: 18),
+                    ),
                   ),
                 ),
 

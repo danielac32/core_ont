@@ -1,21 +1,23 @@
 import 'package:get/get.dart';
 import '../../../presentation/auth/login_screen.dart';
 import '../../../presentation/auth/register_screen.dart';
+import '../../presentation/home/dashboard_admin.dart';
+import '../../presentation/home/dashboard_user.dart';
 //import '../presentation/home/home_screen.dart';
 //import '../presentation/reports/reports_screen.dart';
 
 class AppRoutes {
   static const String login = '/login';
   static const String register = '/register';
-  static const String home = '/home';
-  static const String reports = '/reports';
+  static const String dashboardAdmin = '/admin';
+  static const String dashboardUser = '/user';
 
   // Lista de rutas para GetPages
   static final List<GetPage> routes = [
     GetPage(name: login, page: () => LoginScreen()),
     GetPage(name: register, page: () => RegisterScreen()),
-    //GetPage(name: home, page: () => HomeScreen()),
-    //GetPage(name: reports, page: () => ReportsScreen()),
+    GetPage(name: dashboardAdmin, page: () => DashboardAdmin()),
+    GetPage(name: dashboardUser, page: () => DashboardUser()),
   ];
 
   // Método para navegar a una ruta específica

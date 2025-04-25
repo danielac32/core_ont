@@ -3,6 +3,9 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
+import '../../domain/entities/enum.dart';
+import '../../domain/entities/user.dart';
+
 
 
 class LoginController extends GetxController {
@@ -48,6 +51,20 @@ class LoginController extends GetxController {
     } else {
       Get.snackbar('Error', 'Por favor, corrige los errores en el formulario');
     }
+
+    final newUser = UserEntity(
+      id: 1,
+      name: 'Astrid Quintero',
+      email: 'danielquinteroac32@gmail.com',
+      password: 'ac32mqn42',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+      department: Directorate.generalInformationTechnology.label,
+      profileImage: 'https://example.com/profile.jpg',
+      position: Position.COORDINADOR.label,//'Coordinador',
+      rol: Role.ADMIN.label
+    );
+    Get.toNamed("/admin",arguments:newUser);
   }
 }
 
