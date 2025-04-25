@@ -207,6 +207,289 @@ class UserController extends GetxController {
   }
 }
 
+
+
+
+
+// Widget principal con layout estructurado
+class ListUser extends StatelessWidget {
+  final UserController userController = Get.put(UserController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Header
+        Header(),
+
+        // Contenido principal: Sidebar + Content
+        Expanded(
+          child: Row(
+            children: [
+              // Sidebar
+              Sidebar(),
+
+              // Content
+              Expanded(
+                child: Content(userController: userController),
+              ),
+            ],
+          ),
+        ),
+
+        // Footer
+        Footer(),
+      ],
+    );
+  }
+}
+
+// Header
+class Header extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60,
+      color: Colors.blue,
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Panel de Usuarios',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.settings, color: Colors.white),
+            onPressed: () {
+              Get.snackbar('Configuración', 'Accediendo a configuración...');
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Sidebar
+class Sidebar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200,
+      color: Colors.grey[200],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Menú',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Inicio'),
+            onTap: () {
+              Get.snackbar('Inicio', 'Navegando al inicio...');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.people),
+            title: Text('Usuarios'),
+            onTap: () {
+              Get.snackbar('Usuarios', 'Mostrando lista de usuarios...');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Configuración'),
+            onTap: () {
+              Get.snackbar('Configuración', 'Accediendo a configuración...');
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Content
+class Content extends StatelessWidget {
+  final UserController userController;
+
+  Content({required this.userController});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          // Barra de búsqueda
+          TextField(
+            decoration: InputDecoration(
+              labelText: 'Buscar usuario',
+              border: OutlineInputBorder(),
+              suffixIcon: Icon(Icons.search),
+            ),
+            onChanged: (query) {
+              userController.search(query);
+            },
+          ),
+          SizedBox(height: 16),
+
+          // Lista de usuarios paginada
+          Expanded(
+            child: Obx(() {
+              final paginatedUsers = userController.getPaginatedUsers();
+              return ListView.builder(
+                itemCount: paginatedUsers.length,
+                itemBuilder: (context, index) {
+                  final user = paginatedUsers[index];
+                  return ListTile(
+                    title: Text(user.name),
+                    subtitle: Text('${user.email} - ${user.department}'),
+                  );
+                },
+              );
+            }),
+          ),
+
+          // Paginación
+          Obx(() {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: userController.currentPage.value > 1
+                      ? () => userController.previousPage()
+                      : null,
+                ),
+                Text('Página ${userController.currentPage.value}'),
+                IconButton(
+                  icon: Icon(Icons.arrow_forward),
+                  onPressed: userController.currentPage.value * userController.pageSize <
+                      userController.filteredUsers.length
+                      ? () => userController.nextPage()
+                      : null,
+                ),
+              ],
+            );
+          }),
+        ],
+      ),
+    );
+  }
+}
+
+// Footer
+class Footer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      color: Colors.blueGrey,
+      child: Center(
+        child: Text(
+          '© 2023 Todos los derechos reservados',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
+
+
+class ListUser2 extends StatelessWidget {
+  final UserController userController = Get.put(UserController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Barra de búsqueda
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            decoration: InputDecoration(
+              labelText: 'Buscar usuario',
+              border: OutlineInputBorder(),
+              suffixIcon: Icon(Icons.search),
+            ),
+            onChanged: (query) {
+              userController.search(query);
+            },
+          ),
+        ),
+
+        // Lista de usuarios paginada
+        Expanded(
+          child: Obx(() {
+            final paginatedUsers = userController.getPaginatedUsers();
+            return ListView.builder(
+              itemCount: paginatedUsers.length,
+              itemBuilder: (context, index) {
+                final user = paginatedUsers[index];
+                return ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage("user.profileImage"),
+                  ),
+                  title: Text(user.name),
+                  subtitle: Text('${user.department} - ${user.position}'),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete, color: Colors.red),
+                    onPressed: () {
+                      userController.deleteUser(user.id);
+                    },
+                  ),
+                  onTap: () {
+                    Get.snackbar('Usuario seleccionado', user.name);
+                  },
+                );
+              },
+            );
+          }),
+        ),
+
+        // Paginación
+        Obx(() {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: userController.currentPage.value > 1
+                    ? () => userController.previousPage()
+                    : null,
+              ),
+              Text(
+                'Página ${userController.currentPage.value}',
+                style: TextStyle(fontSize: 16),
+              ),
+              IconButton(
+                icon: Icon(Icons.arrow_forward),
+                onPressed: userController.currentPage.value * userController.pageSize <
+                    userController.filteredUsers.length
+                    ? () => userController.nextPage()
+                    : null,
+              ),
+            ],
+          );
+        }),
+      ],
+    );
+  }
+}
+
+
+/*
 // Widget principal
 class ListUser extends StatelessWidget {
   ListUser({super.key});
@@ -348,6 +631,7 @@ class ListUser extends StatelessWidget {
     );
   }
 }
+*/
 
 
 
