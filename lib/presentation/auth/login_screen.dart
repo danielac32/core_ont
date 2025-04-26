@@ -113,33 +113,12 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 16),
 
                 // Opciones adicionales
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomTextButtonLogin(text:'Registrarse',onPress:controller.register),
-                    CustomTextButtonLogin(text:'Olvidé mi contraseña',onPress:(){
+                Center(
+                    child: CustomTextButtonLogin(text:'Olvidé mi contraseña',onPress:(){
                       Get.snackbar('Recuperación', 'Recuperación no implementada');
                     })
-
-
-                    //CustomTextButton(text:'Registrarse',onPress:(){})
-                    //TextButton(
-                      //  onPressed: controller.register
-                      /*onPressed: () {
-                        Get.toNamed("/register");
-                        //Get.snackbar('Registro', 'Registro no implementado');
-
-                     // },*/
-                      //child: const Text('Registrarse'),
-                    //),
-                    /*TextButton(
-                      onPressed: () {
-                        Get.snackbar('Recuperación', 'Recuperación no implementada');
-                      },
-                      child: const Text('Olvidé mi contraseña'),
-                    ),*/
-                  ],
                 ),
+
               ],
             ),
           ),

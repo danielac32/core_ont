@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../auth/register_screen.dart';
 import '../side_menu_dashboard/content/content_screen.dart';
 import '../side_menu_dashboard/index/index_screen.dart';
 import '../side_menu_dashboard/settings/settings_screen.dart';
 import '../side_menu_dashboard/user/user_screen.dart';
-import '../widgets/dashboard/UserPage/user_widget.dart';
+import '../widgets/dashboard/UserPage/user_list.dart';
+
 
 
 class MenuControllerScreen extends GetxController {
@@ -18,7 +20,8 @@ class MenuControllerScreen extends GetxController {
     UsersScreen(),
     ContentScreen(),
     SettingsScreen(),
-    ListUser()
+    ListUser(),
+    RegisterScreen()
   ];
 
 

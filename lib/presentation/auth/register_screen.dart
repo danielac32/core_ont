@@ -198,9 +198,9 @@ class Buttons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
 
-        CustomButtonWidgetRegister(text:"Volver",onPress:(){
-          Get.back();
-        }),
+        //CustomButtonWidgetRegister(text:"Volver",onPress:(){
+          //Get.back();
+        //}),
         const SizedBox(width: 20),
         CustomButtonWidgetRegister(text:"Crear",onPress: controller.submitForm)
 

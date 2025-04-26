@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../domain/entities/user.dart';
 import '../../../controllers/menu_dashboard_controller.dart';
-
-
+import '../../../controllers/user_list_controller.dart';
 
 
 
@@ -33,17 +32,17 @@ class UserWidget extends StatelessWidget {
         ListTile(
           title: Text('Registro'),
           onTap: () {
-            menuController.changeScreen(1);
+            menuController.changeScreen(5);
             Get.back(); // Cierra el Drawer
           },
         ),
-        ListTile(
+        /*ListTile(
           title: Text('Roles y Permisos'),
           onTap: () {
             menuController.changeScreen(1);
             Get.back(); // Cierra el Drawer
           },
-        ),
+        ),*/
 
       ],
     );
@@ -53,166 +52,14 @@ class UserWidget extends StatelessWidget {
 
 
 // Controlador GetX para manejar la lógica de la lista y la paginación
-class UserController extends GetxController {
-  var users = <UserEntity>[].obs;
-  var filteredUsers = <UserEntity>[].obs;
-  var searchQuery = ''.obs;
-  var currentPage = 1.obs;
-  final int pageSize = 5; // Número de elementos por página
-
-  @override
-  void onInit() {
-    super.onInit();
-    // Inicializamos la lista de usuarios
-    users.value = [
-      UserEntity(
-        id: 1,
-        name: 'Juan Pérez',
-        email: 'juan@example.com',
-        password: 'contraseñaSegura123',
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        department: 'Ventas',
-        profileImage: 'https://example.com/profile.jpg',
-        position: 'Gerente de Ventas',
-      ),
-      UserEntity(
-        id: 2,
-        name: 'María López',
-        email: 'maria@example.com',
-        password: 'claveSegura456',
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        department: 'Recursos Humanos',
-        profileImage: 'https://example.com/maria.jpg',
-        position: 'Especialista en Reclutamiento',
-      ),
-      UserEntity(
-        id: 3,
-        name: 'Carlos Ramírez',
-        email: 'carlos@example.com',
-        password: 'password789',
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        department: 'Tecnología',
-        profileImage: 'https://example.com/carlos.jpg',
-        position: 'Desarrollador Senior',
-      ),
-      UserEntity(
-        id: 4,
-        name: 'Ana Torres',
-        email: 'ana@example.com',
-        password: 'anaPass123',
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        department: 'Marketing',
-        profileImage: 'https://example.com/ana.jpg',
-        position: 'Especialista en Redes Sociales',
-      ),
-      UserEntity(
-        id: 5,
-        name: 'Luis Fernández',
-        email: 'luis@example.com',
-        password: 'luisSecurePass',
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        department: 'Finanzas',
-        profileImage: 'https://example.com/luis.jpg',
-        position: 'Analista Financiero',
-      ),
-      UserEntity(
-        id: 6,
-        name: 'Sofía Gómez',
-        email: 'sofia@example.com',
-        password: 'sofiaPass987',
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        department: 'Operaciones',
-        profileImage: 'https://example.com/sofia.jpg',
-        position: 'Coordinadora de Proyectos',
-      ),
-      UserEntity(
-        id: 7,
-        name: 'Sofía Gómez',
-        email: 'sofia@example.com',
-        password: 'sofiaPass987',
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        department: 'Operaciones',
-        profileImage: 'https://example.com/sofia.jpg',
-        position: 'Coordinadora de Proyectos',
-      ),
-      UserEntity(
-        id: 8,
-        name: 'Sofía Gómez',
-        email: 'sofia@example.com',
-        password: 'sofiaPass987',
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        department: 'Operaciones',
-        profileImage: 'https://example.com/sofia.jpg',
-        position: 'Coordinadora de Proyectos',
-      ),
-      UserEntity(
-        id: 9,
-        name: 'Sofía Gómez',
-        email: 'sofia@example.com',
-        password: 'sofiaPass987',
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        department: 'Operaciones',
-        profileImage: 'https://example.com/sofia.jpg',
-        position: 'Coordinadora de Proyectos',
-      ),
-    ];
-    filteredUsers.value = users;
-  }
-
-  void search(String query) {
-    searchQuery.value = query;
-    if (query.isEmpty) {
-      filteredUsers.value = users;
-    } else {
-      filteredUsers.value = users
-          .where((user) => user.name.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-    }
-    currentPage.value = 1; // Reiniciamos la página al buscar
-  }
-
-  List<UserEntity> getPaginatedUsers() {
-    final start = (currentPage.value - 1) * pageSize;
-    final end = start + pageSize;
-    return filteredUsers.sublist(
-      start,
-      end > filteredUsers.length ? filteredUsers.length : end,
-    );
-  }
-
-  void nextPage() {
-    if (currentPage.value * pageSize < filteredUsers.length) {
-      currentPage.value++;
-    }
-  }
-
-  void previousPage() {
-    if (currentPage.value > 1) {
-      currentPage.value--;
-    }
-  }
-
-  void deleteUser(int id) {
-    users.removeWhere((user) => user.id == id);
-    filteredUsers.removeWhere((user) => user.id == id);
-  }
-}
 
 
 
 
 
+/*
 // Widget principal con layout estructurado
-class ListUser extends StatelessWidget {
+class ListUser2 extends StatelessWidget {
   final UserController userController = Get.put(UserController());
 
   @override
@@ -220,7 +67,7 @@ class ListUser extends StatelessWidget {
     return Column(
       children: [
         // Header
-        Header(),
+        //Header(),
 
         // Contenido principal: Sidebar + Content
         Expanded(
@@ -238,7 +85,7 @@ class ListUser extends StatelessWidget {
         ),
 
         // Footer
-        Footer(),
+       // Footer(),
       ],
     );
   }
@@ -248,9 +95,10 @@ class ListUser extends StatelessWidget {
 class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Container(
       height: 60,
-      color: Colors.blue,
+      color: colors.secondary,
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -405,88 +253,8 @@ class Footer extends StatelessWidget {
     );
   }
 }
+*/
 
-
-class ListUser2 extends StatelessWidget {
-  final UserController userController = Get.put(UserController());
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Barra de búsqueda
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            decoration: InputDecoration(
-              labelText: 'Buscar usuario',
-              border: OutlineInputBorder(),
-              suffixIcon: Icon(Icons.search),
-            ),
-            onChanged: (query) {
-              userController.search(query);
-            },
-          ),
-        ),
-
-        // Lista de usuarios paginada
-        Expanded(
-          child: Obx(() {
-            final paginatedUsers = userController.getPaginatedUsers();
-            return ListView.builder(
-              itemCount: paginatedUsers.length,
-              itemBuilder: (context, index) {
-                final user = paginatedUsers[index];
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage("user.profileImage"),
-                  ),
-                  title: Text(user.name),
-                  subtitle: Text('${user.department} - ${user.position}'),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete, color: Colors.red),
-                    onPressed: () {
-                      userController.deleteUser(user.id);
-                    },
-                  ),
-                  onTap: () {
-                    Get.snackbar('Usuario seleccionado', user.name);
-                  },
-                );
-              },
-            );
-          }),
-        ),
-
-        // Paginación
-        Obx(() {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: userController.currentPage.value > 1
-                    ? () => userController.previousPage()
-                    : null,
-              ),
-              Text(
-                'Página ${userController.currentPage.value}',
-                style: TextStyle(fontSize: 16),
-              ),
-              IconButton(
-                icon: Icon(Icons.arrow_forward),
-                onPressed: userController.currentPage.value * userController.pageSize <
-                    userController.filteredUsers.length
-                    ? () => userController.nextPage()
-                    : null,
-              ),
-            ],
-          );
-        }),
-      ],
-    );
-  }
-}
 
 
 /*

@@ -137,7 +137,7 @@ class RegisterController extends GetxController {
     }
 
     // Si todas las validaciones pasan, mostrar mensaje de éxito
-    Get.snackbar('Inicio de Sesión', 'Inicio de sesión exitoso');
+    Get.snackbar('Usuario', 'Usuario registrado');
   }
 
 
